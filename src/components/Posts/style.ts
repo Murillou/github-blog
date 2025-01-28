@@ -34,7 +34,7 @@ export const SearchInput = styled.input`
 
 export const GridPosts = styled.section`
   display: grid;
-  justify-items: center;
+  justify-items: centerk;
   grid-template-columns: repeat(1, 1fr);
   grid-template-rows: repeat(1, auto);
   gap: 1.5rem;
@@ -60,13 +60,20 @@ export const PostBox = styled.div`
 
   div {
     display: flex;
+    justify-content: space-between;
+    align-items: center;
     gap: 2rem;
-  }
 
-  h1 {
-    color: #e7edf4;
-    font-size: 20px;
-    font-weight: bold;
+    h1 {
+      color: #e7edf4;
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    span {
+      font-size: 14px;
+      color: #7b96b2;
+    }
   }
 
   p {

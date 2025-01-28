@@ -60,7 +60,7 @@ export function Posts() {
           <PostBox key={post.id}>
             <div>
               <h1>{post.title}</h1>
-              <p>{relativeTime(post.updated_at)}</p>
+              <span>{relativeTime(post.updated_at)}</span>
             </div>
             <p>{post.body}</p>
           </PostBox>
