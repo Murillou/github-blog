@@ -10,6 +10,7 @@ import {
 import { relativeTime } from '../../utils/formatter';
 
 import { useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
 
 interface PostProps {
   id: number;
@@ -22,6 +23,7 @@ export function Posts() {
   const [posts, setPosts] = useState<PostProps[]>([]);
   const { register, handleSubmit } = useForm();
   const githubToken = import.meta.env.VITE_GITHUB_TOKEN;
+  const navigate = useNavigate();
 
   async function handleIssueGitHub(searchQuery: string = 'is:issue') {
     const encodedSearchQuery = encodeURIComponent(
@@ -59,6 +61,11 @@ export function Posts() {
     console.log(searchQuery);
   }
 
+  function handlePostClick(id: number) {
+    // Navega para a página de detalhes do post com o id
+    navigate(`/post/${id}`);
+  }
+
   return (
     <PostsContainer>
       <PubsInfo>
@@ -75,7 +82,7 @@ export function Posts() {
 
       <GridPosts>
         {posts.map(post => (
-          <PostBox key={post.id}>
+          <PostBox key={post.id} onClick={() => handlePostClick(post.id)}>
             <div>
               <h1>{post.title}</h1>
               <span>{relativeTime(post.updated_at)}</span>
