@@ -1,10 +1,17 @@
 import { useEffect, useState } from 'react';
-import { UserProfileContainer } from './style';
+import {
+  UserBio,
+  UserLoginAndFollowers,
+  UserName,
+  UserProfileContainer,
+} from './style';
+import { GithubLogo } from 'phosphor-react';
 
 interface UserProps {
   userAvatar: string;
   userName: string;
   userBio: string;
+  userLogin: string;
   userFollower: number;
 }
 
@@ -13,6 +20,7 @@ export function UserProfile() {
     userAvatar: '',
     userName: '',
     userBio: '',
+    userLogin: '',
     userFollower: 0,
   });
 
@@ -29,8 +37,9 @@ export function UserProfile() {
       setUser(prevState => ({
         ...prevState,
         userAvatar: json.avatar_url,
-        userName: json.login,
+        userName: json.name,
         userBio: json.bio,
+        userLogin: json.login,
         userFollower: json.followers,
       }));
     } catch (error: unknown) {
@@ -48,11 +57,27 @@ export function UserProfile() {
         <img src={user.userAvatar} />
       </div>
 
-      <div>
-        <h1>{user.userName}</h1>
-        {user.userBio}
-        {user.userFollower}
-      </div>
+      <section>
+        <UserName>
+          <h1>{user.userName}</h1>
+          <a href="http://github.com/murillou" target="_blank">
+            GitHub
+          </a>
+        </UserName>
+
+        <UserBio>
+          <span>{user.userBio}</span>
+        </UserBio>
+
+        <UserLoginAndFollowers>
+          <span>
+            <GithubLogo size={17} />
+            {user.userLogin}
+          </span>
+
+          <span>{user.userFollower} seguidores</span>
+        </UserLoginAndFollowers>
+      </section>
     </UserProfileContainer>
   );
 }
