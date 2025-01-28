@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react';
 import {
   UserBio,
+  UserInfos,
   UserLoginAndFollowers,
   UserName,
   UserProfileContainer,
 } from './style';
-import { GithubLogo } from 'phosphor-react';
+import { GithubLogo, Link } from 'phosphor-react';
 
 interface UserProps {
   userAvatar: string;
@@ -53,15 +54,13 @@ export function UserProfile() {
   }, []);
   return (
     <UserProfileContainer>
-      <div>
-        <img src={user.userAvatar} />
-      </div>
+      <img src={user.userAvatar} />
 
-      <section>
+      <UserInfos>
         <UserName>
-          <h1>{user.userName}</h1>
+          <span>{user.userName}</span>
           <a href="http://github.com/murillou" target="_blank">
-            GitHub
+            GITHUB <Link size={15} />
           </a>
         </UserName>
 
@@ -77,7 +76,7 @@ export function UserProfile() {
 
           <span>{user.userFollower} seguidores</span>
         </UserLoginAndFollowers>
-      </section>
+      </UserInfos>
     </UserProfileContainer>
   );
 }
