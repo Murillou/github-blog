@@ -8,10 +8,12 @@ import {
   SearchInput,
 } from './style';
 
+import { relativeTime } from '../../utils/formatter';
 interface PostProps {
   id: number;
   title: string;
   body: string;
+  updated_at: string;
 }
 
 export function Posts() {
@@ -58,7 +60,7 @@ export function Posts() {
           <PostBox key={post.id}>
             <div>
               <h1>{post.title}</h1>
-              <p>Há 1 dia</p>
+              <p>{relativeTime(post.updated_at)}</p>
             </div>
             <p>{post.body}</p>
           </PostBox>

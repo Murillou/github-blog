@@ -34,10 +34,16 @@ export const SearchInput = styled.input`
 
 export const GridPosts = styled.section`
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-template-rows: repeat(2, auto);
+  justify-items: center;
+  grid-template-columns: repeat(1, 1fr);
+  grid-template-rows: repeat(1, auto);
   gap: 1.5rem;
   margin-top: 2rem;
+
+  @media (min-width: 640px) {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, auto);
+  }
 `;
 
 export const PostBox = styled.div`

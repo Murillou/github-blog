@@ -34,7 +34,6 @@ export function UserProfile() {
         throw new Error(`Reponse status:${response.status}`);
       }
       const json = await response.json();
-      console.log(json);
       setUser(prevState => ({
         ...prevState,
         userAvatar: json.avatar_url,
