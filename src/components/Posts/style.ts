@@ -31,3 +31,46 @@ export const SearchInput = styled.input`
   border: 1px solid #1c2f41;
   border-radius: 6px;
 `;
+
+export const GridPosts = styled.section`
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, auto);
+  gap: 1.5rem;
+  margin-top: 2rem;
+`;
+
+export const PostBox = styled.div`
+  max-width: 416px;
+  max-height: 260px;
+  height: 100vh;
+  background-color: #112131;
+  padding: 2rem;
+  border-radius: 10px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+
+  div {
+    display: flex;
+    gap: 2rem;
+  }
+
+  h1 {
+    color: #e7edf4;
+    font-size: 20px;
+    font-weight: bold;
+  }
+
+  p {
+    font-size: 16px;
+    font-weight: 400;
+    color: #afc2d4;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 5;
+    -webkit-box-orient: vertical;
+  }
+`;

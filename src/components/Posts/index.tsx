@@ -1,5 +1,12 @@
 import { useEffect, useState } from 'react';
-import { PostsContainer, PubsInfo, SearchForm, SearchInput } from './style';
+import {
+  GridPosts,
+  PostBox,
+  PostsContainer,
+  PubsInfo,
+  SearchForm,
+  SearchInput,
+} from './style';
 
 interface PostProps {
   id: number;
@@ -46,12 +53,17 @@ export function Posts() {
         <SearchInput type="search" placeholder="Buscar conteúdo" />
       </SearchForm>
 
-      {posts.map(post => (
-        <div key={post.id}>
-          <h3>{post.title}</h3>
-          <p>{post.body}</p>
-        </div>
-      ))}
+      <GridPosts>
+        {posts.map(post => (
+          <PostBox key={post.id}>
+            <div>
+              <h1>{post.title}</h1>
+              <p>Há 1 dia</p>
+            </div>
+            <p>{post.body}</p>
+          </PostBox>
+        ))}
+      </GridPosts>
     </PostsContainer>
   );
 }
