@@ -7,8 +7,10 @@ import {
   SearchForm,
   SearchInput,
 } from './style';
-
 import { relativeTime } from '../../utils/formatter';
+
+import { useForm } from 'react-hook-form';
+
 interface PostProps {
   id: number;
   title: string;
@@ -18,12 +20,14 @@ interface PostProps {
 
 export function Posts() {
   const [posts, setPosts] = useState<PostProps[]>([]);
+  const { register, handleSubmit } = useForm();
   const githubToken = import.meta.env.VITE_GITHUB_TOKEN;
 
-  async function handleIssueGitHub() {
-    const url =
-      'https://api.github.com/search/issues?q=is:issue+repo:murillou/github-blog';
-
+  async function handleIssueGitHub(searchQuery: string = 'is:issue') {
+    const encodedSearchQuery = encodeURIComponent(
+      `${searchQuery} repo:murillou/github-blog`
+    );
+    const url = `https://api.github.com/search/issues?q=${encodedSearchQuery}`;
     try {
       const response = await fetch(url, {
         headers: {
@@ -31,6 +35,8 @@ export function Posts() {
         },
       });
       if (!response.ok) {
+        const errorDetails = await response.json();
+        console.error('GitHub Error:', errorDetails);
         throw new Error(`Response Status: ${response.status}`);
       }
       const json = await response.json();
@@ -45,14 +51,26 @@ export function Posts() {
     handleIssueGitHub();
   }, []);
 
+  function handleInputSearchValue(data: any) {
+    const searchQuery = data.valueInput
+      ? `is:issue ${data.valueInput}`
+      : 'is:issue';
+    handleIssueGitHub(searchQuery);
+    console.log(searchQuery);
+  }
+
   return (
     <PostsContainer>
       <PubsInfo>
         <strong>Publicações</strong>
         <span>{posts.length} publicações</span>
       </PubsInfo>
-      <SearchForm>
-        <SearchInput type="search" placeholder="Buscar conteúdo" />
+      <SearchForm onSubmit={handleSubmit(handleInputSearchValue)}>
+        <SearchInput
+          type="search"
+          placeholder="Buscar conteúdo"
+          {...register('valueInput')}
+        />
       </SearchForm>
 
       <GridPosts>

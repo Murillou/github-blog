@@ -30,6 +30,7 @@ export const SearchInput = styled.input`
   background: #040f1a;
   border: 1px solid #1c2f41;
   border-radius: 6px;
+  color: #afc2d4;
 `;
 
 export const GridPosts = styled.section`
@@ -61,7 +62,6 @@ export const PostBox = styled.div`
   div {
     display: flex;
     justify-content: space-between;
-    align-items: center;
     gap: 2rem;
 
     h1 {
