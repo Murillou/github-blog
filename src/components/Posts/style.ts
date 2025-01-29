@@ -54,10 +54,17 @@ export const PostBox = styled.div`
   background-color: #112131;
   padding: 2rem;
   border-radius: 10px;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: border 0.5s;
 
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
+
+  &:hover {
+    border: 2px solid #3a536b;
+  }
 
   div {
     display: flex;

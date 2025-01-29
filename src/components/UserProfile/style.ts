@@ -55,6 +55,12 @@ export const UserName = styled.div`
     text-decoration: none;
     cursor: pointer;
     font-size: 12px;
+    border-bottom: 1px solid transparent;
+    transition: border 0.3s;
+  }
+
+  a:hover {
+    border-bottom: 1px solid #3294f8;
   }
 
   @media (min-width: 480px) {

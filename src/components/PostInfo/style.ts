@@ -46,6 +46,18 @@ export const TitleBox = styled.div`
 
 export const InfoBox = styled.div`
   display: flex;
-  gap: 2rem;
+  flex-direction: column;
+  gap: 0.5rem;
   margin-top: -1rem;
+
+  span {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  @media (min-width: 480px) {
+    flex-direction: row;
+    gap: 2rem;
+  }
 `;

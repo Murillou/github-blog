@@ -1,12 +1,19 @@
-import { CaretLeft, Link, GithubLogo } from 'phosphor-react';
+import {
+  CaretLeft,
+  Link,
+  GithubLogo,
+  CalendarPlus,
+  ChatCircle,
+} from 'phosphor-react';
 import { InfoBox, LinksBox, PostInfoContainer, TitleBox } from './style';
-import { useParams } from 'react-router-dom';
+import { NavLink, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { relativeTime } from '../../utils/formatter';
 
 interface IssuesProps {
   title: string;
   updated_at: string;
+  comments: number;
   user: { login: string };
 }
 
@@ -42,27 +49,38 @@ export function PostInfo() {
   }, [id]);
 
   return (
-    <PostInfoContainer>
-      <LinksBox>
-        <a href="">
-          <CaretLeft size={15} /> VOLTAR
-        </a>
+    <>
+      {' '}
+      <PostInfoContainer>
+        <LinksBox>
+          <NavLink to="/">
+            <CaretLeft size={15} /> VOLTAR
+          </NavLink>
 
-        <a href="http://github.com/murillou" target="_blank">
-          VER NO GITHUB <Link size={15} />
-        </a>
-      </LinksBox>
-      <TitleBox>
-        <h1>{issue ? issue.title : 'Carregando...'}</h1>
-      </TitleBox>
-      <InfoBox>
-        <span>
-          <GithubLogo size={17} />
-          {issue ? issue.user.login : 'Carregando...'}
-        </span>
-        <span>{relativeTime(issue?.updated_at || '')}</span>
-        <span>5 comentários</span>
-      </InfoBox>
-    </PostInfoContainer>
+          <a href="http://github.com/murillou" target="_blank">
+            VER NO GITHUB <Link size={15} />
+          </a>
+        </LinksBox>
+        <TitleBox>
+          <h1>{issue ? issue.title : 'Carregando...'}</h1>
+        </TitleBox>
+        <InfoBox>
+          <span>
+            <GithubLogo size={17} />
+            {issue ? issue.user.login : 'Carregando...'}
+          </span>
+          <span>
+            <CalendarPlus size={17} />
+
+            {relativeTime(issue?.updated_at || '')}
+          </span>
+          <span>
+            <ChatCircle size={17} />
+
+            {issue ? `${issue.comments} comentários` : 'Carregando...'}
+          </span>
+        </InfoBox>
+      </PostInfoContainer>
+    </>
   );
 }
