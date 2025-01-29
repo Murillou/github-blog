@@ -61,3 +61,12 @@ export const InfoBox = styled.div`
     gap: 2rem;
   }
 `;
+
+export const BodyInfoContainer = styled.div`
+  color: #afc2d4;
+
+  padding: 2rem;
+  width: 90%;
+  max-width: 864px;
+  margin: 0 auto;
+`;

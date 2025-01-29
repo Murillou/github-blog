@@ -5,7 +5,13 @@ import {
   CalendarPlus,
   ChatCircle,
 } from 'phosphor-react';
-import { InfoBox, LinksBox, PostInfoContainer, TitleBox } from './style';
+import {
+  BodyInfoContainer,
+  InfoBox,
+  LinksBox,
+  PostInfoContainer,
+  TitleBox,
+} from './style';
 import { NavLink, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { relativeTime } from '../../utils/formatter';
@@ -14,6 +20,7 @@ interface IssuesProps {
   title: string;
   updated_at: string;
   comments: number;
+  body: string;
   user: { login: string };
 }
 
@@ -81,6 +88,9 @@ export function PostInfo() {
           </span>
         </InfoBox>
       </PostInfoContainer>
+      <BodyInfoContainer>
+        {issue ? issue.body : 'Carregando...'}
+      </BodyInfoContainer>
     </>
   );
 }
