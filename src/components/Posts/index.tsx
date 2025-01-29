@@ -12,10 +12,13 @@ import { relativeTime } from '../../utils/formatter';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { IssueContext } from '../../contexts/IssueContext';
+interface FormData {
+  valueInput: string;
+}
 
 export function Posts() {
   const { posts, setPosts } = useContext(IssueContext);
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit } = useForm<FormData>();
   const githubToken = import.meta.env.VITE_GITHUB_TOKEN;
   const navigate = useNavigate();
 
@@ -47,7 +50,7 @@ export function Posts() {
     handleIssueGitHub();
   }, []);
 
-  function handleInputSearchValue(data: any) {
+  function handleInputSearchValue(data: FormData) {
     const searchQuery = data.valueInput
       ? `is:issue ${data.valueInput}`
       : 'is:issue';

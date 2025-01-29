@@ -1,11 +1,18 @@
-import { CaretLeft, Link } from 'phosphor-react';
+import { CaretLeft, Link, GithubLogo } from 'phosphor-react';
 import { InfoBox, LinksBox, PostInfoContainer, TitleBox } from './style';
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import { relativeTime } from '../../utils/formatter';
+
+interface IssuesProps {
+  title: string;
+  updated_at: string;
+  user: { login: string };
+}
 
 export function PostInfo() {
   const { id } = useParams<{ id: string }>();
-  const [post, setPost] = useState(null);
+  const [issue, setIssue] = useState<IssuesProps>();
   const githubToken = import.meta.env.VITE_GITHUB_TOKEN;
 
   useEffect(() => {
@@ -25,7 +32,7 @@ export function PostInfo() {
           }
           const data = await response.json();
           console.log('Post data:', data);
-          setPost(data);
+          setIssue(data);
         } catch (error) {
           console.error('Erro:', error);
         }
@@ -46,11 +53,14 @@ export function PostInfo() {
         </a>
       </LinksBox>
       <TitleBox>
-        <h1>Teste</h1>
+        <h1>{issue ? issue.title : 'Carregando...'}</h1>
       </TitleBox>
       <InfoBox>
-        <span>Murillou</span>
-        <span>Hoje</span>
+        <span>
+          <GithubLogo size={17} />
+          {issue ? issue.user.login : 'Carregando...'}
+        </span>
+        <span>{relativeTime(issue?.updated_at || '')}</span>
         <span>5 comentários</span>
       </InfoBox>
     </PostInfoContainer>
