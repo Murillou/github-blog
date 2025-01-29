@@ -69,4 +69,6 @@ export const BodyInfoContainer = styled.div`
   width: 90%;
   max-width: 864px;
   margin: 0 auto;
+
+  word-break: break-all;
 `;

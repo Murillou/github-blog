@@ -18,7 +18,11 @@ interface FormData {
 
 export function Posts() {
   const { posts, setPosts } = useContext(IssueContext);
-  const { register, handleSubmit } = useForm<FormData>();
+  const {
+    register,
+    handleSubmit,
+    formState: { isSubmitting },
+  } = useForm<FormData>();
   const githubToken = import.meta.env.VITE_GITHUB_TOKEN;
   const navigate = useNavigate();
 
@@ -73,6 +77,7 @@ export function Posts() {
           type="search"
           placeholder="Buscar conteúdo"
           {...register('valueInput')}
+          disabled={isSubmitting}
         />
       </SearchForm>
 

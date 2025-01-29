@@ -31,11 +31,12 @@ export const SearchInput = styled.input`
   border: 1px solid #1c2f41;
   border-radius: 6px;
   color: #afc2d4;
+  cursor: pointer;
 `;
 
 export const GridPosts = styled.section`
   display: grid;
-  justify-items: centerk;
+  justify-items: center;
   grid-template-columns: repeat(1, 1fr);
   grid-template-rows: repeat(1, auto);
   gap: 1.5rem;
@@ -49,6 +50,8 @@ export const GridPosts = styled.section`
 
 export const PostBox = styled.div`
   max-width: 416px;
+  min-width: 300px;
+  width: 100%;
   max-height: 260px;
   height: 100vh;
   background-color: #112131;
