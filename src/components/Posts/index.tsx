@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect } from 'react';
 import {
   GridPosts,
   PostBox,
@@ -11,16 +11,10 @@ import { relativeTime } from '../../utils/formatter';
 
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
-
-interface PostProps {
-  id: number;
-  title: string;
-  body: string;
-  updated_at: string;
-}
+import { IssueContext } from '../../contexts/IssueContext';
 
 export function Posts() {
-  const [posts, setPosts] = useState<PostProps[]>([]);
+  const { posts, setPosts } = useContext(IssueContext);
   const { register, handleSubmit } = useForm();
   const githubToken = import.meta.env.VITE_GITHUB_TOKEN;
   const navigate = useNavigate();
@@ -62,7 +56,6 @@ export function Posts() {
   }
 
   function handlePostClick(id: number) {
-    // Navega para a página de detalhes do post com o id
     navigate(`/post/${id}`);
   }
 
@@ -82,7 +75,10 @@ export function Posts() {
 
       <GridPosts>
         {posts.map(post => (
-          <PostBox key={post.id} onClick={() => handlePostClick(post.id)}>
+          <PostBox
+            key={post.number}
+            onClick={() => handlePostClick(post.number)}
+          >
             <div>
               <h1>{post.title}</h1>
               <span>{relativeTime(post.updated_at)}</span>
